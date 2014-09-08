@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- SmoothProgressBar -->
+    <color name="default_progress_bar_color">#FF33B5E5</color>
+
+    <!-- SuperToasts -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dark_gray">#333333</color>
+    <color name="light_gray">#AFFFFFFF</color>
+
+</resources>
