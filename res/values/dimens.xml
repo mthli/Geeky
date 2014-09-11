@@ -2,13 +2,12 @@
 
 <resources>
 
-    <!-- SmoothProgressBar -->
-    <dimen name="ptr_progress_bar_stroke_width">4dp</dimen>
-
-    <!-- SuperToasts -->
-    <dimen name="toast_hover">64dp</dimen>
-    <dimen name="buttontoast_hover">24dp</dimen>
-    <dimen name="buttontoast_x_padding">12dp</dimen>
-    <dimen name="cardtoast_margin">4dp</dimen>
+    <!--
+         ListBuddies,
+         Default screen margins, per the Android Design guidelines.
+    -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="default_margin_between_lists">3dp</dimen>
 
 </resources>

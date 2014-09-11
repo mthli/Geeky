@@ -2,13 +2,7 @@
 
 <resources>
 
-    <!-- SmoothProgressBar -->
-    <color name="default_progress_bar_color">#FF33B5E5</color>
-
-    <!-- SuperToasts -->
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
-    <color name="dark_gray">#333333</color>
-    <color name="light_gray">#AFFFFFFF</color>
+    <!-- ListBuddies -->
+    <color name="list_buddlies_blue">#7733B5E5</color>
 
 </resources>
