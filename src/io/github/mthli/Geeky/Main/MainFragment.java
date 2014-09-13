@@ -1,9 +1,9 @@
 package io.github.mthli.Geeky.Main;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
+import com.android.volley.Cache;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,25 +18,147 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
 public class MainFragment extends ProgressFragment {
     private View view;
     private ListBuddiesLayout buddies;
-    private CircularAdapter adapterToday;
-    private CircularAdapter adapterHistory;
-    private List<ArticleItem> listToday = new ArrayList<ArticleItem>();
-    private List<ArticleItem> listHistory = new ArrayList<ArticleItem>();
+    private CircularAdapter adapterLeft;
+    private CircularAdapter adapterRight;
+    private List<ArticleItem> listLeft = new ArrayList<ArticleItem>();
+    private List<ArticleItem> listRight = new ArrayList<ArticleItem>();
 
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
-    private boolean isFirst = true;
-    private boolean isLastest = true;
+    private ActionBar actionBar;
 
     private RequestQueue requests;
+
+    private static final int LIMIT = 10;
+    List<String> allCards = new ArrayList<String>();
+
+    private List<String> getCardItems(String str) {
+        String[] arr = str.split(getString(R.string.div_gpcard_list));
+        arr = arr[0].split(getString(R.string.div_gpcard));
+        List<String> cards = new ArrayList<String>();
+        for(int i = 1; i < arr.length; i++) {
+            arr[i] = arr[i].substring(0, arr[i].length() - 6);
+            cards.add(arr[i]);
+        }
+
+        return cards;
+    }
+
+    private List<ArticleItem> parser(List<String> cards) {
+        List<ArticleItem> list = new ArrayList<ArticleItem>();
+
+        for (String s : cards) {
+            Document document = Jsoup.parse(s);
+            Elements elemImgLink = document.getElementsByClass(getString(R.string.class_img_link));
+            Elements elemTitle = document.getElementsByClass(getString(R.string.class_title));
+            Elements elemTime = document.getElementsByClass(getString(R.string.class_publish_time));
+            Elements elemContent = document.getElementsByClass(getString(R.string.class_abstract));
+
+            String title = elemTitle.text();
+            String date = elemTime.text();
+            String content = elemContent.text();
+            String imgLink = elemImgLink.attr(getString(R.string.attr_data_src)).split("\\?")[0];
+            String articleLink = elemImgLink.attr(getString(R.string.attr_href));
+
+            ArticleItem item = new ArticleItem(
+                    title,
+                    content,
+                    date,
+                    imgLink,
+                    articleLink,
+                    true,
+                    null
+            );
+            list.add(item);
+        }
+
+        return list;
+    }
+
+    private void setBuddiesData(List<ArticleItem> list) {
+        listLeft.clear();
+        listRight.clear();
+        for(ArticleItem item : list) {
+            if (item.getDate().contains("-")) {
+                String[] arr = item.getDate().split("-");
+                arr[2] = arr[2].split(" ")[0];
+                String date = arr[0]
+                        + getString(R.string.article_item_date_year)
+                        + arr[1]
+                        + getString(R.string.article_item_date_mouth)
+                        + arr[2]
+                        + getString(R.string.article_item_date_day);
+                item.setDate(date);
+            }
+        }
+        Collections.sort(list);
+        for (int i = 0; i < LIMIT / 2; i++) {
+            listLeft.add(list.get(i));
+            listRight.add(list.get(i + 5));
+        }
+        adapterLeft.notifyDataSetChanged();
+        adapterRight.notifyDataSetChanged();
+    }
+
+    private void getHomePage() {
+        String url = getString(R.string.homepage_url);
+
+        StringRequest requestLeft = new StringRequest(
+                url + 1,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String str) {
+                        List<String> list = getCardItems(str);
+                        for (String s : list) {
+                            allCards.add(s);
+                        }
+                        if (allCards.size() >= LIMIT) {
+                            setBuddiesData(parser(allCards));
+                            actionBar.show();
+                            actionBar.setTitle(null);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        /* Do something */
+                    }
+                }
+
+        );
+        requests.add(requestLeft);
+
+        StringRequest requestRight = new StringRequest(
+                url + 2,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String str) {
+                        List<String> list = getCardItems(str);
+                        for (String s : list) {
+                            allCards.add(s);
+                        }
+                        if (allCards.size() >= LIMIT) {
+                            setBuddiesData(parser(allCards));
+                            actionBar.show();
+                            actionBar.setTitle(null);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        /* Do something */
+                    }
+                }
+        );
+        requests.add(requestRight);
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -48,88 +170,14 @@ public class MainFragment extends ProgressFragment {
         setContentShown(true);
 
         buddies = (ListBuddiesLayout) view.findViewById(R.id.buddies);
-        adapterToday = new CircularAdapter(getActivity(), listToday);
-        adapterHistory = new CircularAdapter(getActivity(), listHistory);
-        buddies.setAdapters(adapterToday, adapterHistory);
+        adapterLeft = new CircularAdapter(getActivity(), listLeft);
+        adapterRight = new CircularAdapter(getActivity(), listRight);
+        buddies.setAdapters(adapterLeft, adapterRight);
 
-        preferences = getActivity().getSharedPreferences(
-                getString(R.string.main_sp),
-                Context.MODE_PRIVATE
-        );
-        editor = preferences.edit();
+        actionBar = getActivity().getActionBar();
 
         requests = Volley.newRequestQueue(view.getContext());
 
-        getHomePage(1);
-    }
-
-    private void getHomePage(int pageNum) {
-        String url = getString(R.string.homepage_url);
-        url = url + pageNum;
-        StringRequest request = new StringRequest(
-                url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        /* Do something */
-                        getCardItems(s);
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        /* Do something */
-                    }
-                }
-        );
-        requests.add(request);
-    }
-
-    private void getCardItems(String str) {
-        String[] arr = str.split(getString(R.string.div_gpcard_list));
-        arr = arr[0].split(getString(R.string.div_gpcard));
-        List<String> cards = new ArrayList<String>();
-        for(int i = 1; i < arr.length; i++) {
-            arr[i] = arr[i].substring(0, arr[i].length() - 6);
-            cards.add(arr[i]);
-        }
-        parser(true, cards);
-    }
-
-    private void parser(boolean flag, List<String> cards) {
-        if (flag) {
-            listToday.clear();
-            for (int i = 0; i < cards.size(); i++) {
-                /* Do something */
-                Document document = Jsoup.parse(cards.get(i));
-                Elements elemImgLink = document.getElementsByClass(getString(R.string.class_img_link));
-                Elements elemTitle = document.getElementsByClass(getString(R.string.class_title));
-                Elements elemContent = document.getElementsByClass(getString(R.string.class_abstract));
-
-                String title = elemTitle.text();
-                String content = elemContent.text();
-                Date dateToday = new Date();
-                SimpleDateFormat format = new SimpleDateFormat(getString(R.string.article_item_date_format));
-                String date = format.format(dateToday);
-                String imgLink = elemImgLink.attr(getString(R.string.attr_data_src)).split("\\?")[0];
-                String articleLink = elemImgLink.attr(getString(R.string.attr_href));
-
-                /* Do something */
-                listToday.add(
-                        new ArticleItem(
-                                title,
-                                content,
-                                date,
-                                imgLink,
-                                articleLink,
-                                true,
-                                null
-                        )
-                );
-            }
-            adapterToday.notifyDataSetChanged();
-        } else {
-            /* Do something */
-        }
+        getHomePage();
     }
 }

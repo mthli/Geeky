@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- App Info -->
+    <!-- App -->
     <string name="app_name">Geeky</string>
 
     <!-- Init -->
+    <string name="init_intent_result">RESULT</string>
 
     <!-- Main -->
-    <string name="main_sp">InitFile</string>
-    <string name="main_sp_first">true</string>
-    <string name="main_sp_lastest">Lastest</string>
+    <string name="main_menu_about">关于</string>
+    <string name="article_item_date_year">年</string>
+    <string name="article_item_date_mouth">月</string>
+    <string name="article_item_date_day">日</string>
     <string name="article_item_date_format">yyyy年MM月dd日</string>
 
     <!-- Url -->
@@ -19,6 +21,7 @@
     <string name="div_gpcard_list">&lt;div class=\"gpcard list\"></string>
     <string name="class_img_link">img-link</string>
     <string name="class_title">title</string>
+    <string name="class_publish_time">publish_time</string>
     <string name="class_abstract">abstract</string>
     <string name="class_tags">tags</string>
     <string name="attr_href">href</string>

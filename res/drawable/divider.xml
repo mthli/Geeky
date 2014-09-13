@@ -2,6 +2,6 @@
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <solid android:color="@color/gpcard_bg_transparent" />
+    <solid android:color="@color/gpcard_divider_color" />
 
 </shape>

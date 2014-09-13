@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         buddies:speed="2"
-        buddies:gapColor="@color/gpcard_bg_transparent"
+        buddies:gapColor="@color/gpcard_divider_color"
         buddies:gap="@dimen/default_margin_between_lists"
         buddies:listsDivider="@drawable/divider"
         buddies:listsDividerHeight="@dimen/default_margin_between_lists"

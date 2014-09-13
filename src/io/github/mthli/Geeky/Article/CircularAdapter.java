@@ -5,8 +5,6 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.RequestQueue;
@@ -18,7 +16,6 @@ import com.jpardogo.listbuddies.lib.adapters.CircularLoopAdapter;
 import io.github.mthli.Geeky.R;
 
 import java.util.List;
-import java.util.Random;
 
 public class CircularAdapter extends CircularLoopAdapter {
     private Context context;
@@ -80,10 +77,9 @@ public class CircularAdapter extends CircularLoopAdapter {
 
         ArticleItem item = getItem(position);
         if (item.getFlag()) {
-            /* Do something */
-            setImageView(holder.image, item.getImgLink());
+            setImageView(holder.image, item);
         } else {
-            /* Do something */
+            holder.image.setImageBitmap(item.getBitmap());
         }
         holder.title.setText(item.getTitle());
         holder.content.setText(item.getContent());
@@ -92,18 +88,16 @@ public class CircularAdapter extends CircularLoopAdapter {
         return view;
     }
 
-    private void setImageView(final ImageView view, String imgLink) {
+    private void setImageView(final ImageView view, final ArticleItem item) {
         ImageRequest request = new ImageRequest(
-                imgLink,
+                item.getImgLink(),
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-                        Animation animation = AnimationUtils.loadAnimation(
-                                context,
-                                R.anim.image_anim
-                        );
-                        view.startAnimation(animation);
+                        /* Do someting */
                         view.setImageBitmap(bitmap);
+                        item.setFlag(false);
+                        item.setBitmap(bitmap);
                     }
                 },
                 0,

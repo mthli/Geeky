@@ -2,7 +2,7 @@ package io.github.mthli.Geeky.Article;
 
 import android.graphics.Bitmap;
 
-public class ArticleItem {
+public class ArticleItem implements Comparable<ArticleItem> {
     private String title;
     private String content;
     private String date;
@@ -78,5 +78,14 @@ public class ArticleItem {
     }
     public void setBitmap(Bitmap bitmap) {
         this.bitmap = bitmap;
+    }
+
+    @Override
+    public int compareTo(ArticleItem item) {
+        if (this.articleLink != null) {
+            return item.getArticleLink().toLowerCase().compareTo(this.articleLink.toLowerCase());
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }
