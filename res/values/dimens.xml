@@ -8,6 +8,6 @@
     -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="default_margin_between_lists">3dp</dimen>
+    <dimen name="default_margin_between_lists">1dp</dimen>
 
 </resources>

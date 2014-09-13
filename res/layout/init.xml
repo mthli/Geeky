@@ -5,11 +5,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <fragment android:name="io.github.mthli.Geeky.Main.MainFragment"
-              android:id="@+id/main_fragment"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    </fragment>
+    <!-- Do something -->
 
 </LinearLayout>
-

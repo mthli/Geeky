@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.jpardogo.listbuddies.lib.views.ListBuddiesLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:buddies="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/buddies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        buddies:speed="2"
+        buddies:gapColor="@color/gpcard_bg_transparent"
+        buddies:gap="@dimen/default_margin_between_lists"
+        buddies:listsDivider="@drawable/divider"
+        buddies:listsDividerHeight="@dimen/default_margin_between_lists"
+        buddies:autoScrollFaster="right"
+        buddies:scrollFaster="right">
+</com.jpardogo.listbuddies.lib.views.ListBuddiesLayout>

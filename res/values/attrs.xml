@@ -3,6 +3,9 @@
 <resources>
 
     <!-- ListBuddies -->
+    <declare-styleable name="SelectorOptions">
+        <attr name="selectorColor" format="color" />
+    </declare-styleable>
     <declare-styleable name="ListBuddiesOptions">
         <attr name="gap" format="reference" />
         <attr name="gapColor" format="color" />

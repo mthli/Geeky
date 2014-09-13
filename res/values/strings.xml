@@ -4,4 +4,24 @@
     <!-- App Info -->
     <string name="app_name">Geeky</string>
 
+    <!-- Init -->
+
+    <!-- Main -->
+    <string name="main_sp">InitFile</string>
+    <string name="main_sp_first">true</string>
+    <string name="main_sp_lastest">Lastest</string>
+    <string name="article_item_date_format">yyyy年MM月dd日</string>
+
+    <!-- Url -->
+    <string name="website_url">http://www.geekpark.net</string>
+    <string name="homepage_url">http://www.geekpark.net/?page=</string>
+    <string name="div_gpcard">&lt;div class=\"gpcard \"></string>
+    <string name="div_gpcard_list">&lt;div class=\"gpcard list\"></string>
+    <string name="class_img_link">img-link</string>
+    <string name="class_title">title</string>
+    <string name="class_abstract">abstract</string>
+    <string name="class_tags">tags</string>
+    <string name="attr_href">href</string>
+    <string name="attr_data_src">data-src</string>
+
 </resources>

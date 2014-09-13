@@ -1,0 +1,31 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:orientation="horizontal"
+       android:layout_height="match_parent"
+       tools:context=".MainActivity$PlaceholderFragment"
+       android:layout_weight="2">
+
+    <com.jpardogo.listbuddies.lib.views.ObservableListView
+            android:id="@+id/list_left"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:listSelector="@android:color/transparent"
+            android:layout_height="match_parent">
+    </com.jpardogo.listbuddies.lib.views.ObservableListView>
+
+    <ViewStub android:id="@+id/gap"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              android:layout="@layout/gap">
+    </ViewStub>
+
+    <com.jpardogo.listbuddies.lib.views.ObservableListView
+            android:id="@+id/list_right"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:listSelector="@android:color/transparent"
+            android:layout_height="match_parent">
+    </com.jpardogo.listbuddies.lib.views.ObservableListView>
+
+</merge>
