@@ -45,7 +45,11 @@
     <string name="div_share">div.share</string>
     <string name="tag_figure">figure</string>
     <string name="tag_img">img</string>
+
+    <string name="attr_srcset">srcset</string>
     <string name="attr_data_origin_src">data-origin-src</string>
+    <string name="attr_src">src</string>
+
     <string name="tag_image_begin">&lt;img src=\"</string>
     <string name="tag_image_end">\"&lt;/img></string>
 

@@ -17,8 +17,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import io.github.mthli.Geeky.Main.MainActivity;
 import io.github.mthli.Geeky.R;
 import net.frakbot.jumpingbeans.JumpingBeans;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;

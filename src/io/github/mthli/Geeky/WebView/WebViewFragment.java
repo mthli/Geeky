@@ -83,9 +83,11 @@ public class WebViewFragment extends ProgressFragment {
 
     private String parser(String str) {
         Document document = Jsoup.parse(str);
+
         Element element = document.getElementById(
                 getString(R.string.id_article)
         );
+
         element.select(
                 getString(R.string.div_share)
         ).remove();
@@ -95,6 +97,10 @@ public class WebViewFragment extends ProgressFragment {
         );
         String src = s.get(0).attr(getString(R.string.attr_data_origin_src));
 
+        for (Element e : s) {
+            e.removeAttr(getString(R.string.attr_srcset));
+        }
+
         element.select(
                 getString(R.string.tag_figure)
         ).remove();
@@ -103,6 +109,11 @@ public class WebViewFragment extends ProgressFragment {
                 + src
                 + getString(R.string.tag_image_end)
                 + element.html();
+
+        content = content.replace(
+                getString(R.string.attr_data_origin_src),
+                getString(R.string.attr_src)
+        );
 
         return content;
     }
