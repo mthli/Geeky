@@ -5,10 +5,10 @@
     <string name="app_name">Geeky</string>
 
     <!-- Init -->
+    <string name="init_img_cd">Image</string>
     <string name="init_sp">SP</string>
     <string name="init_sp_match">MATCH</string>
     <string name="init_intent_list">LIST</string>
-    <string name="init_text_geeky">Geeky</string>
     <string name="init_text_introduction">极客公园第三方客户端</string>
     <string name="init_text_status_loading">加载中&#8230;</string>
     <string name="init_text_status_failed">网络错误 :(</string>

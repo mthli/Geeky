@@ -9,21 +9,20 @@
 
                 android:background="@color/gpcard_image_bg_green">
 
-    <TextView android:id="@+id/init_geeky"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center"
-              android:paddingBottom="200dp"
-              android:text="@string/init_text_geeky"
-              android:textSize="40sp"
-              android:textColor="@color/init_geeky_color">
-    </TextView>
+    <ImageView android:id="@+id/init_geeky"
+               android:contentDescription="@string/init_img_cd"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:paddingBottom="256dp"
+               android:src="@drawable/geeky"
+               android:layout_centerInParent="true">
+    </ImageView>
 
     <TextView android:id="@+id/init_introduction"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:gravity="center"
-              android:paddingBottom="120dp"
+              android:paddingBottom="170dp"
               android:text="@string/init_text_introduction"
               android:textSize="12sp"
               android:textColor="@color/init_introduction_color">
