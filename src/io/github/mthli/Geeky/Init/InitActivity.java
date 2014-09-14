@@ -16,14 +16,12 @@ import com.android.volley.toolbox.Volley;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import io.github.mthli.Geeky.Main.MainActivity;
 import io.github.mthli.Geeky.R;
-import net.frakbot.jumpingbeans.JumpingBeans;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InitActivity extends Activity {
     private TextView textView;
-    private JumpingBeans jumpingBeans;
 
     private RequestQueue requests;
 
@@ -70,7 +68,6 @@ public class InitActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         flag = false;
-                        jumpingBeans.stopJumping();
                         textView.setText(getString(R.string.init_text_status_failed));
 
                     }
@@ -103,7 +100,6 @@ public class InitActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         flag = false;
-                        jumpingBeans.stopJumping();
                         textView.setText(getString(R.string.init_text_status_failed));
                     }
                 }
@@ -125,9 +121,6 @@ public class InitActivity extends Activity {
 
         textView = (TextView) findViewById(R.id.init_status);
         textView.setText(getString(R.string.init_text_status_loading));
-        jumpingBeans = new JumpingBeans.Builder()
-                .appendJumpingDots(textView)
-                .build();
 
         requests = Volley.newRequestQueue(this);
 

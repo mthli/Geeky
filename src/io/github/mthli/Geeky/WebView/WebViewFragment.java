@@ -32,18 +32,6 @@ public class WebViewFragment extends ProgressFragment {
         view = getContentView();
         webView = (WebView) view.findViewById(R.id.webview);
 
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setLoadsImagesAutomatically(true);
-        webSettings.setLayoutAlgorithm(
-                WebSettings.LayoutAlgorithm.NARROW_COLUMNS.NORMAL
-        );
-        webSettings.setSupportZoom(true);
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setUseWideViewPort(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setDisplayZoomControls(false);
-
         requests = Volley.newRequestQueue(view.getContext());
 
         intent = getActivity().getIntent();
@@ -118,7 +106,40 @@ public class WebViewFragment extends ProgressFragment {
         return content;
     }
 
+    private boolean flag = false;
+
+    public boolean getFlag() {
+        return flag;
+    }
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
     private void load(String content) {
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setLoadsImagesAutomatically(true);
+
+        if (flag) {
+            webSettings.setLayoutAlgorithm(
+                    WebSettings.LayoutAlgorithm.NARROW_COLUMNS
+            );
+            webSettings.setSupportZoom(false);
+            webSettings.setBuiltInZoomControls(false);
+            webSettings.setUseWideViewPort(false);
+            webSettings.setLoadWithOverviewMode(false);
+            webSettings.setDisplayZoomControls(false);
+        } else {
+            webSettings.setLayoutAlgorithm(
+                    WebSettings.LayoutAlgorithm.NARROW_COLUMNS.NORMAL
+            );
+            webSettings.setSupportZoom(true);
+            webSettings.setBuiltInZoomControls(true);
+            webSettings.setUseWideViewPort(true);
+            webSettings.setLoadWithOverviewMode(true);
+            webSettings.setDisplayZoomControls(false);
+        }
+
         webView.loadDataWithBaseURL(
                 MarkdownStyle.BASE_URL,
                 MarkdownStyle.getMarkdownStyle(content),

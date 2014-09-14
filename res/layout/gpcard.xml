@@ -23,7 +23,9 @@
               android:paddingRight="5dp"
               android:paddingTop="5dp"
               android:textSize="14sp"
-              android:textColor="@color/gpcard_title_color">
+              android:textColor="@color/gpcard_title_color"
+              android:maxLines="3"
+              android:ellipsize="end">
     </TextView>
 
     <TextView android:id="@+id/article_content"
@@ -32,7 +34,9 @@
               android:paddingLeft="5dp"
               android:paddingRight="5dp"
               android:textSize="12sp"
-              android:textColor="@color/gpcard_content_color">
+              android:textColor="@color/gpcard_content_color"
+              android:maxLines="7"
+              android:ellipsize="end">
     </TextView>
 
     <TextView android:id="@+id/article_date"

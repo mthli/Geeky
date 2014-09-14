@@ -1,6 +1,8 @@
 package io.github.mthli.Geeky.Main;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
@@ -8,19 +10,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import io.github.mthli.Geeky.Article.ArticleItem;
 import io.github.mthli.Geeky.Article.CircularAdapter;
 import io.github.mthli.Geeky.R;
+import io.github.mthli.Geeky.WebView.MarkdownStyle;
 import io.github.mthli.Geeky.WebView.WebViewActivity;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,8 +36,6 @@ public class MainActivity extends Activity {
     private CircularAdapter adapterRight;
     private List<ArticleItem> listLeft = new ArrayList<ArticleItem>();
     private List<ArticleItem> listRight = new ArrayList<ArticleItem>();
-
-    private RequestQueue requests;
 
     private static final int LIMIT = 10;
     private ArrayList<String> allCards;
@@ -86,8 +89,8 @@ public class MainActivity extends Activity {
         }
         Collections.sort(list);
         for (int i = 0; i < LIMIT / 2; i++) {
-            listLeft.add(list.get(i));
-            listRight.add(list.get(i + 5));
+            listLeft.add(list.get(i + 5));
+            listRight.add(list.get(i));
         }
         adapterLeft.notifyDataSetChanged();
         adapterRight.notifyDataSetChanged();
@@ -110,8 +113,6 @@ public class MainActivity extends Activity {
         adapterLeft = new CircularAdapter(this, listLeft);
         adapterRight = new CircularAdapter(this, listRight);
         buddies.setAdapters(adapterLeft, adapterRight);
-
-        requests = Volley.newRequestQueue(this);
 
         allCards = getIntent().getStringArrayListExtra(
                 getString(R.string.init_intent_list)
@@ -158,7 +159,7 @@ public class MainActivity extends Activity {
 
         switch (item.getItemId()) {
             case R.id.main_menu_about:
-                /* Do something */
+                showAboutDialog();
                 break;
             default:
                 break;
@@ -177,5 +178,36 @@ public class MainActivity extends Activity {
         else{
             /* Do nothing */
         }
+    }
+
+    private void showAboutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.about_label);
+
+        String str = null;
+        try {
+            InputStream inputStream = getResources().getAssets().open(
+                    getString(R.string.about_readme)
+            );
+            str = IOUtils.toString(inputStream);
+        } catch (IOException i) {
+            /* Do nothing */
+        }
+
+        WebView webView = new WebView(MainActivity.this);
+        webView.loadDataWithBaseURL(
+                MarkdownStyle.BASE_URL,
+                str,
+                null,
+                getString(R.string.webview_encoding),
+                null
+        );
+
+        builder.setNegativeButton(R.string.about_button_close, null);
+        builder.setView(webView);
+        builder.setInverseBackgroundForced(true);
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
     }
 }

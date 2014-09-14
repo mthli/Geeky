@@ -5,13 +5,16 @@
     <string name="app_name">Geeky</string>
 
     <!-- Init -->
+    <string name="init_sp">SP</string>
+    <string name="init_sp_match">MATCH</string>
     <string name="init_intent_list">LIST</string>
     <string name="init_text_geeky">Geeky</string>
     <string name="init_text_introduction">极客公园第三方客户端</string>
-    <string name="init_text_status_loading">加载中</string>
+    <string name="init_text_status_loading">加载中&#8230;</string>
     <string name="init_text_status_failed">网络错误 :(</string>
 
     <!-- Main -->
+    <string name="main_menu_match">自适应屏幕</string>
     <string name="main_menu_about">关于</string>
     <string name="main_intent_url">URL</string>
     <string name="article_item_date_year">年</string>
@@ -22,12 +25,17 @@
     <!-- WebView -->
     <string name="webview_encoding">UTF-8</string>
     <string name="webview_menu_refresh">刷新</string>
+    <string name="webview_menu_match">自适应屏幕</string>
     <string name="webview_menu_share">分享</string>
+    <string name="webview_menu_share_to">分享到</string>
+    <string name="webview_menu_share_type">text/plain</string>
     <string name="webview_text_status_loading">加载中</string>
     <string name="webview_text_status_failed">网络错误 :(</string>
 
     <!-- About -->
     <string name="about_label">关于</string>
+    <string name="about_readme">README.html</string>
+    <string name="about_button_close">关闭</string>
 
     <!-- Url -->
     <string name="website_url">http://www.geekpark.net</string>
