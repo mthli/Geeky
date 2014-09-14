@@ -125,11 +125,6 @@ public class InitActivity extends Activity {
             manager.setTintColor(color);
         }
 
-        CalligraphyConfig.initDefault(
-                getString(R.string.init_font_path),
-                R.attr.fontPath
-        );
-
         textView = (TextView) findViewById(R.id.init_status);
         textView.setText(getString(R.string.init_text_status_loading));
         jumpingBeans = new JumpingBeans.Builder()
@@ -153,11 +148,6 @@ public class InitActivity extends Activity {
         }
 
         return false;
-    }
-
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
     @Override

@@ -6,7 +6,6 @@
 
     <!-- Init -->
     <string name="init_intent_list">LIST</string>
-    <string name="init_font_path">Fonts/Bounce.otf</string>
     <string name="init_text_geeky">Geeky</string>
     <string name="init_text_introduction">极客公园第三方客户端</string>
     <string name="init_text_status_loading">加载中</string>
@@ -14,14 +13,26 @@
 
     <!-- Main -->
     <string name="main_menu_about">关于</string>
+    <string name="main_intent_url">URL</string>
     <string name="article_item_date_year">年</string>
     <string name="article_item_date_mouth">月</string>
     <string name="article_item_date_day">日</string>
     <string name="article_item_date_format">yyyy年MM月dd日</string>
 
+    <!-- WebView -->
+    <string name="webview_encoding">UTF-8</string>
+    <string name="webview_menu_refresh">刷新</string>
+    <string name="webview_menu_share">分享</string>
+    <string name="webview_text_status_loading">加载中</string>
+    <string name="webview_text_status_failed">网络错误 :(</string>
+
+    <!-- About -->
+    <string name="about_label">关于</string>
+
     <!-- Url -->
     <string name="website_url">http://www.geekpark.net</string>
     <string name="homepage_url">http://www.geekpark.net/?page=</string>
+
     <string name="div_gpcard">&lt;div class=\"gpcard \"></string>
     <string name="div_gpcard_list">&lt;div class=\"gpcard list\"></string>
     <string name="class_img_link">img-link</string>
@@ -29,10 +40,16 @@
     <string name="class_publish_time">publish_time</string>
     <string name="class_abstract">abstract</string>
     <string name="class_tags">tags</string>
+
+    <string name="id_article">article</string>
+    <string name="div_share">div.share</string>
+    <string name="tag_figure">figure</string>
+    <string name="tag_img">img</string>
+    <string name="attr_data_origin_src">data-origin-src</string>
+    <string name="tag_image_begin">&lt;img src=\"</string>
+    <string name="tag_image_end">\"&lt;/img></string>
+
     <string name="attr_href">href</string>
     <string name="attr_data_src">data-src</string>
-
-    <!-- About -->
-    <string name="about_label">关于</string>
 
 </resources>

@@ -5,4 +5,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <fragment android:name="io.github.mthli.Geeky.WebView.WebViewFragment"
+              android:id="@+id/webview_fragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    </fragment>
+
 </LinearLayout>

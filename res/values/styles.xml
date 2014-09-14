@@ -15,9 +15,4 @@
         <item name="android:actionBarDivider">@null</item>
     </style>
 
-    <!-- Calligraphy -->
-    <style name="InitTextGeekyStyle" parent="android:TextAppearance">
-        <item name="fontPath">@string/init_font_path</item>
-    </style>
-
 </resources>

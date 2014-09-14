@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
@@ -15,6 +16,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import io.github.mthli.Geeky.Article.ArticleItem;
 import io.github.mthli.Geeky.Article.CircularAdapter;
 import io.github.mthli.Geeky.R;
+import io.github.mthli.Geeky.WebView.WebViewActivity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -111,22 +113,41 @@ public class MainActivity extends Activity {
 
         requests = Volley.newRequestQueue(this);
 
-        Intent intent = getIntent();
-        allCards = intent.getStringArrayListExtra(
+        allCards = getIntent().getStringArrayListExtra(
                 getString(R.string.init_intent_list)
         );
         setBuddiesData(parser(allCards));
 
-        /* Do something */
+        buddies.setOnItemClickListener(new ListBuddiesLayout.OnBuddyItemClickListener() {
+            @Override
+            public void onBuddyItemClicked(AdapterView<?> parent, View view, int buddy, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                switch (buddy) {
+                    case 0:
+                        intent.putExtra(
+                                getString(R.string.main_intent_url),
+                                listLeft.get(position).getArticleLink()
+                        );
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        intent.putExtra(
+                                getString(R.string.main_intent_url),
+                                listRight.get(position).getArticleLink()
+                        );
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-
         getMenuInflater().inflate(R.menu.main_menu, menu);
-
-        /* Do something */
 
         return true;
     }

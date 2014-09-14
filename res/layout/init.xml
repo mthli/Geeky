@@ -16,8 +16,7 @@
               android:paddingBottom="200dp"
               android:text="@string/init_text_geeky"
               android:textSize="40sp"
-              android:textColor="@color/init_geeky_color"
-              android:textAppearance="@style/InitTextGeekyStyle">
+              android:textColor="@color/init_geeky_color">
     </TextView>
 
     <TextView android:id="@+id/init_introduction"

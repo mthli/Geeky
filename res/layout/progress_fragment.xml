@@ -17,6 +17,15 @@
                      android:layout_height="wrap_content">
         </ProgressBar>
 
+        <!--
+        <TextView android:id="@+id/progress_text"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center"
+                  android:visibility="gone">
+        </TextView>
+        -->
+
     </LinearLayout>
 
     <FrameLayout android:id="@+id/content_container"
