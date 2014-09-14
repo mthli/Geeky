@@ -5,5 +5,5 @@
        android:toAlpha="1.0"
        android:interpolator="@android:anim/linear_interpolator"
        android:repeatCount="0"
-       android:duration="250">
+       android:duration="375">
 </alpha>

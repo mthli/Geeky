@@ -6,6 +6,10 @@
 
     <!-- Init -->
     <string name="init_intent_list">LIST</string>
+    <string name="init_text_geeky">Geeky</string>
+    <string name="init_text_introduction">极客公园第三方客户端</string>
+    <string name="init_text_status_loading">加载中</string>
+    <string name="init_text_status_failed">网络错误 :(</string>
 
     <!-- Main -->
     <string name="main_menu_about">关于</string>

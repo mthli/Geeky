@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -12,11 +13,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import io.github.mthli.Geeky.Main.MainActivity;
 import io.github.mthli.Geeky.R;
+import net.frakbot.jumpingbeans.JumpingBeans;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InitActivity extends Activity {
+    private TextView textView;
+    private JumpingBeans jumpingBeans;
+
     private RequestQueue requests;
 
     private static final int LIMIT = 10;
@@ -62,7 +67,8 @@ public class InitActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         flag = false;
-                        /* Do something */
+                        jumpingBeans.stopJumping();
+                        textView.setText(getString(R.string.init_text_status_failed));
 
                     }
                 }
@@ -94,7 +100,8 @@ public class InitActivity extends Activity {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         flag = false;
-                        /* Do something */
+                        jumpingBeans.stopJumping();
+                        textView.setText(getString(R.string.init_text_status_failed));
                     }
                 }
         );
@@ -105,6 +112,12 @@ public class InitActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.init);
+
+        textView = (TextView) findViewById(R.id.init_status);
+        textView.setText(getString(R.string.init_text_status_loading));
+        jumpingBeans = new JumpingBeans.Builder()
+                .appendJumpingDots(textView)
+                .build();
 
         requests = Volley.newRequestQueue(this);
 

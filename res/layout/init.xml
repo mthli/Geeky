@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/gpcard_image_bg_green">
+
+    <TextView android:id="@+id/init_geeky"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/gpcard_image_bg_green">
+              android:gravity="center"
+              android:paddingBottom="200dp"
+              android:text="@string/init_text_geeky"
+              android:textSize="40sp"
+              android:textColor="@color/init_geeky_color">
+    </TextView>
 
-    <!-- Do something -->
+    <TextView android:id="@+id/init_introduction"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:paddingBottom="120dp"
+              android:text="@string/init_text_introduction"
+              android:textSize="12sp"
+              android:textColor="@color/init_introduction_color">
+    </TextView>
 
-</LinearLayout>
+    <TextView android:id="@+id/init_status"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:paddingTop="375dp"
+              android:paddingLeft="10dp"
+              android:textSize="12sp"
+              android:textColor="@color/init_status_color">
+    </TextView>
+
+</RelativeLayout>
