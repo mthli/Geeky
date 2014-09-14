@@ -1,23 +1,123 @@
 package io.github.mthli.Geeky.Main;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+import io.github.mthli.Geeky.Article.ArticleItem;
+import io.github.mthli.Geeky.Article.CircularAdapter;
 import io.github.mthli.Geeky.R;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
-public class MainActivity extends FragmentActivity {
-    private MainFragment fragment;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class MainActivity extends Activity {
+    private ListBuddiesLayout buddies;
+    private CircularAdapter adapterLeft;
+    private CircularAdapter adapterRight;
+    private List<ArticleItem> listLeft = new ArrayList<ArticleItem>();
+    private List<ArticleItem> listRight = new ArrayList<ArticleItem>();
+
+    private RequestQueue requests;
+
+    private static final int LIMIT = 10;
+    private ArrayList<String> allCards;
+
+    private List<ArticleItem> parser(List<String> cards) {
+        List<ArticleItem> list = new ArrayList<ArticleItem>();
+
+        for (String s : cards) {
+            Document document = Jsoup.parse(s);
+            Elements elemImgLink = document.getElementsByClass(getString(R.string.class_img_link));
+            Elements elemTitle = document.getElementsByClass(getString(R.string.class_title));
+            Elements elemTime = document.getElementsByClass(getString(R.string.class_publish_time));
+            Elements elemContent = document.getElementsByClass(getString(R.string.class_abstract));
+
+            String title = elemTitle.text();
+            String date = elemTime.text();
+            String content = elemContent.text();
+            String imgLink = elemImgLink.attr(getString(R.string.attr_data_src)).split("\\?")[0];
+            String articleLink = elemImgLink.attr(getString(R.string.attr_href));
+
+            ArticleItem item = new ArticleItem(
+                    title,
+                    content,
+                    date,
+                    imgLink,
+                    articleLink,
+                    true,
+                    null
+            );
+            list.add(item);
+        }
+
+        return list;
+    }
+
+    private void setBuddiesData(List<ArticleItem> list) {
+        listLeft.clear();
+        listRight.clear();
+        for(ArticleItem item : list) {
+            if (item.getDate().contains("-")) {
+                String[] arr = item.getDate().split("-");
+                arr[2] = arr[2].split(" ")[0];
+                String date = arr[0]
+                        + getString(R.string.article_item_date_year)
+                        + arr[1]
+                        + getString(R.string.article_item_date_mouth)
+                        + arr[2]
+                        + getString(R.string.article_item_date_day);
+                item.setDate(date);
+            }
+        }
+        Collections.sort(list);
+        for (int i = 0; i < LIMIT / 2; i++) {
+            listLeft.add(list.get(i));
+            listRight.add(list.get(i + 5));
+        }
+        adapterLeft.notifyDataSetChanged();
+        adapterRight.notifyDataSetChanged();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        getActionBar().hide();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager manager = new SystemBarTintManager(this);
+            manager.setStatusBarTintEnabled(true);
+            int color = getResources().getColor(R.color.gpcard_image_bg_green);
+            manager.setTintColor(color);
+        }
+        getActionBar().setTitle(null);
 
-        fragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+        buddies = (ListBuddiesLayout) findViewById(R.id.buddies);
+        adapterLeft = new CircularAdapter(this, listLeft);
+        adapterRight = new CircularAdapter(this, listRight);
+        buddies.setAdapters(adapterLeft, adapterRight);
+
+        requests = Volley.newRequestQueue(this);
+
+        Intent intent = getIntent();
+        allCards = intent.getStringArrayListExtra(
+                getString(R.string.init_intent_list)
+        );
+        setBuddiesData(parser(allCards));
+
+        /* Do something */
     }
 
     @Override
@@ -35,7 +135,13 @@ public class MainActivity extends FragmentActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
 
-        /* Do something */
+        switch (item.getItemId()) {
+            case R.id.main_menu_about:
+                /* Do something */
+                break;
+            default:
+                break;
+        }
 
         return true;
     }

@@ -7,11 +7,8 @@
     
     <!-- gpcard -->
     <color name="gpcard_image_bg_white">#FFFFFF</color>
-    <color name="gpcard_image_bg_blue">#33B5E5</color>
-    <color name="gpcard_image_bg_pur">#AA66CC</color>
-    <color name="gpcard_image_bg_green">#99CC00</color>
-    <color name="gpcard_image_bg_yellow">#FFBB33</color>
-    <color name="gpcard_image_bg_red">#FF4444</color>
+    <color name="gpcard_image_bg_blue">#0288D1</color>
+    <color name="gpcard_image_bg_green">#0A8F08</color>
     <color name="gpcard_divider_color">#F0F0F0</color>
     <color name="gpcard_title_color">#333333</color>
     <color name="gpcard_content_color">#7E7E7E</color>

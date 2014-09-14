@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.volley.RequestQueue;
@@ -94,8 +96,13 @@ public class CircularAdapter extends CircularLoopAdapter {
                 new Response.Listener<Bitmap>() {
                     @Override
                     public void onResponse(Bitmap bitmap) {
-                        /* Do someting */
+                        Animation animation = AnimationUtils.loadAnimation(
+                                context,
+                                R.anim.image_alpha
+                        );
                         view.setImageBitmap(bitmap);
+                        view.startAnimation(animation);
+
                         item.setFlag(false);
                         item.setBitmap(bitmap);
                     }

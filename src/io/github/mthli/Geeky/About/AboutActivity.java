@@ -1,4 +1,7 @@
 package io.github.mthli.Geeky.About;
 
-public class AboutActivity {
+import android.app.Activity;
+
+public class AboutActivity extends Activity {
+    /* Do something */
 }

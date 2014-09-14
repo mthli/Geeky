@@ -5,7 +5,7 @@
     <string name="app_name">Geeky</string>
 
     <!-- Init -->
-    <string name="init_intent_result">RESULT</string>
+    <string name="init_intent_list">LIST</string>
 
     <!-- Main -->
     <string name="main_menu_about">关于</string>
@@ -26,5 +26,8 @@
     <string name="class_tags">tags</string>
     <string name="attr_href">href</string>
     <string name="attr_data_src">data-src</string>
+
+    <!-- About -->
+    <string name="about_label">关于</string>
 
 </resources>

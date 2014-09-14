@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Do something -->
+    <style name="CustomActionBarTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/CustomActionBarStyle</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+    
+    <style name="CustomActionBarStyle" parent="android:Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/gpcard_image_bg_green</item>
+        <item name="android:actionBarDivider">@null</item>
+    </style>
 
 </resources>
