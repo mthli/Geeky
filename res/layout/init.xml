@@ -3,6 +3,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
+                android:fitsSystemWindows="true"
+                android:clipToPadding="false"
+
                 android:background="@color/gpcard_image_bg_green">
 
     <TextView android:id="@+id/init_geeky"
@@ -12,7 +16,8 @@
               android:paddingBottom="200dp"
               android:text="@string/init_text_geeky"
               android:textSize="40sp"
-              android:textColor="@color/init_geeky_color">
+              android:textColor="@color/init_geeky_color"
+              android:textAppearance="@style/InitTextGeekyStyle">
     </TextView>
 
     <TextView android:id="@+id/init_introduction"

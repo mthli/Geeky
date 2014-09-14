@@ -1,8 +1,10 @@
 package io.github.mthli.Geeky.Init;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.TextView;
@@ -11,9 +13,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import io.github.mthli.Geeky.Main.MainActivity;
 import io.github.mthli.Geeky.R;
 import net.frakbot.jumpingbeans.JumpingBeans;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,6 +118,18 @@ public class InitActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.init);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            SystemBarTintManager manager = new SystemBarTintManager(this);
+            manager.setStatusBarTintEnabled(true);
+            int color = getResources().getColor(R.color.gpcard_image_bg_green);
+            manager.setTintColor(color);
+        }
+
+        CalligraphyConfig.initDefault(
+                getString(R.string.init_font_path),
+                R.attr.fontPath
+        );
+
         textView = (TextView) findViewById(R.id.init_status);
         textView.setText(getString(R.string.init_text_status_loading));
         jumpingBeans = new JumpingBeans.Builder()
@@ -136,6 +153,11 @@ public class InitActivity extends Activity {
         }
 
         return false;
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(new CalligraphyContextWrapper(newBase));
     }
 
     @Override

@@ -30,4 +30,7 @@
 
     </declare-styleable>
 
+    <!-- Calligraphy -->
+    <attr name="fontPath" format="string"/>
+
 </resources>
